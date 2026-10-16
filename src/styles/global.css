@@ -1,0 +1,129 @@
+/* ==========================================================
+   EL GUARDIÁN DEL CENTENO — Sistema visual
+   ========================================================== */
+:root {
+  /* Paleta */
+  --choco: #29211b;      /* chocolate oscuro: secciones de contraste */
+  --brown: #3b2d23;      /* marrón profundo: logo, texto fuerte */
+  --caramel: #a66f42;    /* caramelo: acentos, CTA secundarios */
+  --caramel-d: #8a5a33;  /* caramelo oscuro: hover / texto sobre crema */
+  --beige: #d7c3a8;      /* beige artesanal: líneas, bordes */
+  --cream: #f4ebdd;      /* crema cálido: fondos de sección */
+  --paper: #faf7f0;      /* blanco cálido: fondo base */
+  --ink: #2b221c;        /* texto */
+  --muted: #6f5f51;      /* texto secundario */
+  --line: rgba(59, 45, 35, .16);
+
+  /* Tipografía */
+  --f-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --f-sans: 'Outfit', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Espaciado y medidas */
+  --gutter: clamp(16px, 4vw, 48px);
+  --max: 1240px;
+  --section: clamp(72px, 10vw, 140px);
+  --radius: 2px;
+  --ease: cubic-bezier(.22, .61, .36, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  font-family: var(--f-sans);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+/* Textura sutil de papel / harina */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 100;
+  opacity: .05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--caramel); outline-offset: 3px; }
+
+.wrap { width: 100%; max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
+
+/* ---------- Tipografía ---------- */
+h1, h2, h3 { font-family: var(--f-serif); font-weight: 500; line-height: 1.08; margin: 0; letter-spacing: -.01em; }
+h1 { font-size: clamp(2.9rem, 7vw, 5.6rem); }
+h2 { font-size: clamp(2.1rem, 4.6vw, 3.6rem); }
+h3 { font-size: clamp(1.35rem, 2vw, 1.6rem); }
+em.acc { font-style: italic; color: var(--caramel); }
+p { margin: 0; }
+
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: .74rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--caramel-d);
+}
+.eyebrow::before { content: ''; width: 28px; height: 1px; background: currentColor; }
+
+/* Etiqueta tipo Instagram: sans pesada en mayúsculas */
+.label-bold { font-family: var(--f-sans); font-weight: 800; text-transform: uppercase; letter-spacing: .02em; }
+
+/* ---------- Botones ---------- */
+.btn {
+  --bg: var(--brown); --fg: var(--paper);
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 50px; padding: 0 26px;
+  background: var(--bg); color: var(--fg);
+  border: 1px solid var(--bg); border-radius: var(--radius);
+  font-size: .82rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  text-decoration: none; cursor: pointer;
+  transition: background .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease), transform .2s var(--ease);
+}
+.btn:hover { --bg: var(--choco); }
+.btn:active { transform: translateY(1px); }
+.btn svg { width: 16px; height: 16px; transition: transform .35s var(--ease); }
+.btn:hover svg { transform: translateX(3px); }
+.btn--ghost { --bg: transparent; --fg: var(--brown); border-color: var(--brown); }
+.btn--ghost:hover { --bg: var(--brown); --fg: var(--paper); }
+.btn--caramel { --bg: var(--caramel); }
+.btn--caramel:hover { --bg: var(--caramel-d); }
+.btn--light { --bg: var(--cream); --fg: var(--choco); }
+.btn--light:hover { --bg: var(--paper); }
+
+.link-arrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: .78rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+  text-decoration: none; color: var(--brown);
+  border-bottom: 1px solid var(--beige); padding-bottom: 4px;
+  transition: gap .3s var(--ease), border-color .3s var(--ease);
+}
+.link-arrow:hover { gap: 14px; border-color: var(--brown); }
+.link-arrow { white-space: nowrap; }
+.link-arrow svg { width: 14px; height: 14px; flex: none; }
+
+/* Marca de dato no confirmado */
+.tbc {
+  display: inline-block; padding: 2px 8px;
+  font-size: .64rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--caramel-d); border: 1px dashed var(--caramel); border-radius: 20px;
+  white-space: nowrap; vertical-align: middle;
+}
+.photo-tag {
+  position: absolute; left: 10px; bottom: 10px; z-index: 2;
+  padding: 3px 8px; font-size: .6rem; letter-spacing: .1em; text-transform: uppercase;
+  background: rgba(41, 33, 27, .6); color: var(--cream); border-radius: 2px;
+  backdrop-filter: blur(4px);
+}
+
+/* ---------- Revelado al hacer scroll ---------- */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+.reveal.is-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
